@@ -1,7 +1,7 @@
 # herogi-scala
 Herogi scala helper library
 
-##SBT Settings
+## SBT Settings
 
 Just add herogi as a dependency.
 
