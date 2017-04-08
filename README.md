@@ -1,6 +1,16 @@
 # herogi-scala
 Herogi scala helper library
 
+##SBT Settings
+
+Just add herogi as a dependency.
+
+Latest:
+
+```
+"com.herogi.client" %% "herogi-client" % "1.0.0-SNAPSHOT"
+```
+
 ## Your First Event
 
 Following is minimum needed code send an event to Herogi, you can find the full example [here](https://github.com/Herogi/herogi-scala/blob/master/src/test/scala/com/herogi/client/EventSenderSpec.scala).
