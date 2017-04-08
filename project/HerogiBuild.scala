@@ -1,11 +1,12 @@
 import sbt._
 import Keys._
+import com.typesafe.sbt.SbtPgp.autoImportImpl._
 
 object HerogiBuild extends Build {
 
   lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
     organization := "com.herogi.client",
-    version := "1.0.0",
+    version := "1.0.0-SNAPSHOT",
     scalaVersion := "2.11.9",
 
     parallelExecution in Test := false,
@@ -29,8 +30,34 @@ object HerogiBuild extends Build {
       "io.spray"                    % "spray-json_2.11"      % "1.3.3",
       "com.typesafe.akka"           % "akka-http-spray-json_2.11" % "10.0.5",
       "org.scalatest"               %% "scalatest"           % "3.0.1"   % "test",
-      "org.mockito"                 %   "mockito-core"       % "2.2.9"   % "test")
+      "org.mockito"                 %   "mockito-core"       % "2.2.9"   % "test"),
 
+
+    useGpg := true,
+    pomIncludeRepository := { _ => false },
+
+    licenses := Seq("MIT" -> url("https://opensource.org/licenses/MIT")),
+
+    homepage := Some(url("https://herogi.com")),
+
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/your-account/your-project"),
+        "scm:git@github.com:your-account/your-project.git"
+      )
+    ),
+
+    publishMavenStyle := true,
+
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (isSnapshot.value)
+        Some("snapshots" at nexus + "content/repositories/snapshots")
+      else
+        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    },
+
+    publishArtifact in Test := true
   )
 
   lazy val root = Project(
