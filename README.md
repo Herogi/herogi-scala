@@ -3,7 +3,7 @@ Herogi scala helper library
 
 ## Your First Event
 
-Following is minimum needed code send an event to Herogi, you can find the full example [here](https://github.com/Herogi/herogi-scala/blob/master/Example.scala).
+Following is minimum needed code send an event to Herogi, you can find the full example [here](https://github.com/Herogi/herogi-scala/blob/master/src/test/scala/com/herogi/client/EventSenderSpec.scala).
 
 ```scala
   implicit val system = ActorSystem()
