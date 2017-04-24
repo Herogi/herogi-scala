@@ -42,10 +42,12 @@ object HerogiBuild extends Build {
 
     scmInfo := Some(
       ScmInfo(
-        url("https://github.com/your-account/your-project"),
-        "scm:git@github.com:your-account/your-project.git"
+        url("https://github.com/Herogi/herogi-scala"),
+        "git@github.com:Herogi/herogi-scala.git"
       )
     ),
+
+    pomExtra := extraPom,
 
     publishMavenStyle := true,
 
@@ -64,4 +66,13 @@ object HerogiBuild extends Build {
     id = "herogi-client",
     base = file("."),
     settings = commonSettings)
+
+  def extraPom = <developers>
+    <developer>
+      <email>info@herogi.com</email>
+      <name>Herogi Team</name>
+      <url>https://github.com/Herogi</url>
+      <id>funkyeng</id>
+    </developer>
+  </developers>
 }
