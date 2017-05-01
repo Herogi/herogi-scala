@@ -14,19 +14,24 @@ import com.herogi.client.models.formatter.EventApiFormatter._
 import scala.concurrent.{ExecutionContext, Future}
 
 
-class HerogiEventSender(appid: String, appSecret: String, api: String = "https://stream.herogi.com/event")(implicit system: ActorSystem, ec: ExecutionContext) {
+class HerogiEventSender(appid: String,
+                        appSecret: String,
+                        api: String = "https://stream.herogi.com/event",
+                        enabled: Boolean = true)
+                       (implicit system: ActorSystem, ec: ExecutionContext) {
 
   val authorization = headers.Authorization(BasicHttpCredentials(appid, appSecret))
 
   implicit val materializer = ActorMaterializer()
 
-  def sendEvent(event: Event): Future[Response] = {
-
-    for {
-      entity <- Marshal(event).to[RequestEntity]
-      response <- Http().singleRequest(HttpRequest(uri = api, method = HttpMethods.POST, headers = List(authorization), entity = entity))
-      obj <- deserialize(response)
-    } yield obj
+  def sendEvent(event: Event): Future[Response] = enabled match {
+    case true =>
+      for {
+        entity <- Marshal(event).to[RequestEntity]
+        response <- Http().singleRequest(HttpRequest(uri = api, method = HttpMethods.POST, headers = List(authorization), entity = entity))
+        obj <- deserialize(response)
+      } yield obj
+    case false => Future.successful(SuccessResponse("success - (debug mode)"))
   }
 
   private def deserialize[T](res: HttpResponse)(implicit um: Unmarshaller[ResponseEntity, T]): Future[Response] = {
