@@ -13,5 +13,5 @@ object EventApiFormatter extends DefaultJsonProtocol {
 
   implicit val SuccessResponseFormat = jsonFormat1(SuccessResponse)
 
-  implicit val FailureResponseFormat = jsonFormat3(FailureResponse)
+  implicit val FailureResponseFormat = jsonFormat4(FailureResponse)
 }

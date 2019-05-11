@@ -16,9 +16,11 @@ import scala.concurrent.{ExecutionContext, Future}
 
 class HerogiEventSender(appid: String,
                         appSecret: String,
-                        api: String = "https://stream.herogi.com/event",
+                        api: String = "https://stream.herogi.com",
                         enabled: Boolean = true)
                        (implicit system: ActorSystem, ec: ExecutionContext) {
+
+  private val EventApi = api + "/v2/event"
 
   val authorization = headers.Authorization(BasicHttpCredentials(appid, appSecret))
 
@@ -28,7 +30,7 @@ class HerogiEventSender(appid: String,
     case true =>
       for {
         entity <- Marshal(event).to[RequestEntity]
-        response <- Http().singleRequest(HttpRequest(uri = api, method = HttpMethods.POST, headers = List(authorization), entity = entity))
+        response <- Http().singleRequest(HttpRequest(uri = EventApi , method = HttpMethods.POST, headers = List(authorization), entity = entity))
         obj <- deserialize(response)
       } yield obj
     case false => Future.successful(SuccessResponse("success - (debug mode)"))

@@ -17,7 +17,7 @@ class EventSenderSpec extends FunSuite with Matchers with ScalaFutures {
 
   val eventSender = new HerogiEventSender("appid", "appsecret")
 
-  val event = new Event("s1", "e1", List("scenario1"), None)
+  val event = new Event(None, "e1", List("scenario1"), None)
 
   test("Send an unauthorized event") {
 

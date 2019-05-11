@@ -6,7 +6,7 @@ object HerogiBuild extends Build {
 
   lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
     organization := "com.herogi.client",
-    version := "1.0.1-SNAPSHOT",
+    version := "1.1.0-SNAPSHOT",
     scalaVersion := "2.11.9",
 
     parallelExecution in Test := false,
