@@ -6,7 +6,7 @@ object HerogiBuild extends Build {
 
   lazy val commonSettings = Defaults.coreDefaultSettings ++ Seq(
     organization := "com.herogi.client",
-    version := "1.1.0",
+    version := "2.0.0",
     scalaVersion := "2.11.9",
 
     parallelExecution in Test := false,
@@ -25,10 +25,11 @@ object HerogiBuild extends Build {
     //  into build.sbt for each project
     //
     libraryDependencies ++= Seq(
-      "com.typesafe.akka"           %% "akka-http"           % "10.0.5",
+      "com.typesafe.akka"           %% "akka-stream"         % "2.5.22",
+      "com.typesafe.akka"           %% "akka-http"           % "10.1.8",
       "com.typesafe.scala-logging"  %% "scala-logging"       % "3.5.0",
       "io.spray"                    % "spray-json_2.11"      % "1.3.3",
-      "com.typesafe.akka"           % "akka-http-spray-json_2.11" % "10.0.5",
+      "com.typesafe.akka"           % "akka-http-spray-json_2.11" % "10.1.8",
       "org.scalatest"               %% "scalatest"           % "3.0.1"   % "test",
       "org.mockito"                 %   "mockito-core"       % "2.2.9"   % "test"),
 
